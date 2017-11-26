@@ -20,7 +20,7 @@ dependencies {
     compile 'org.bytemechanics:type-ex:X.X.X'
 }
 ```
-2. Create your typified exceptions
+1. Create your typified exceptions
 ```Java
 package mypackage;
 import org.bytemechanics.typeex.impl.TypifiedException;
@@ -38,7 +38,7 @@ public enum MyExceptionType implements ExceptionType{
 	}
 }
 ```
-3. Launch an exception
+1. Launch an exception
 * Manually
 ```Java
 throw MyExceptionType.EXCEPTION_TYPE_PARAMETERIZED
