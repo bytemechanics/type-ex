@@ -15,30 +15,28 @@
  */
 package org.bytemechanics.typeex;
 
+import spock.lang.*
+import spock.lang.Specification
+import org.bytemechanics.typeex.*
+import org.bytemechanics.typeex.impl.*
 
 /**
  * @author afarre
  */
-public enum MockedTypifiedCheckedExceptionType implements ExceptionType<MockedCheckedException>{
-	
-	TEST_NO_PARAMS("Test message without parameters"),
-	TEST_WITH_1_PARAM("Test message with parameter1 {} other"),
-	TEST_WITH_PARAMS("Test message with parameter1 {} and parameter2 {}"),
-	;
-	
-	private final String message;
-	
-	MockedTypifiedCheckedExceptionType(final String _message){
-		this.message=_message;
-	}
-	
-	@Override
-	public String getMessage() {
-		return this.message;
-	}
+class GenericsCompilationSpec extends Specification {
 
-	@Override
-	public Class<? extends MockedCheckedException> getExceptionClass() {
-		return MockedCheckedException.class;
+	def "Generic exception build should work correctly"(){
+		when:
+			def result=TestGenericsCompilation.correctCastWhenBuildException()
+			
+		then:
+			result==true
+	}
+	def "Generic exception build assignation should work correctly"(){
+		when:
+			def result=TestGenericsCompilation.assignMockedChekedException()
+			
+		then:
+			result==true
 	}
 }

@@ -15,7 +15,6 @@
  */
 package org.bytemechanics.typeex;
 
-import org.bytemechanics.typeex.ExceptionType;
 import org.bytemechanics.typeex.impl.TypifiedCheckedException;
 
 /**
