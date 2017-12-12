@@ -6,7 +6,7 @@ In the old times all application errors were indexed in never-ending lists in bi
 
 ## Quick start
 1. First of all include the Jar file in your compile and execution classpath.
-### Maven
+**Maven**
 ```Maven
 	<dependency>
 		<groupId>org.bytemechanics</groupId>
@@ -14,7 +14,7 @@ In the old times all application errors were indexed in never-ending lists in bi
 		<version>X.X.X</version>
 	</dependency>
 ```
-### Graddle
+**Graddle**
 ```Gradle
 dependencies {
     compile 'org.bytemechanics:type-ex:X.X.X'
@@ -39,13 +39,13 @@ public enum MyExceptionType implements ExceptionType{
 }
 ```
 1. Launch an exception
-* Manually
+**Manually**
 ```Java
 throw MyExceptionType.EXCEPTION_TYPE_PARAMETERIZED
 						.from(cause)
 						.with("String1",1);
 ```
-* From lambda
+**From lambda**
 ```Java
 Optional.of(null)
 		.orElseThrow(MyExceptionType.EXCEPTION_TYPE_PARAMETERIZED
