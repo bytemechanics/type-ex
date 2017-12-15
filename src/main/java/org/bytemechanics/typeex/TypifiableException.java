@@ -85,15 +85,15 @@ public interface TypifiableException<T extends TypifiableException> extends Supp
 	/**
 	 * Returns clone of this same TypifiableException object with the given cause
 	 *
-	 * @param <T> Type of this exception
+	 * @param <EXCEPTION_INSTANCE> Type of this exception
 	 * @param _cause cause of the exception
 	 * @return The T instance
 	 * @since 0.3.0
 	 */
-	public default <T extends TypifiableException> T from(final Throwable _cause) {
+	public default <EXCEPTION_INSTANCE extends Throwable & TypifiableException<EXCEPTION_INSTANCE>> EXCEPTION_INSTANCE from(final Throwable _cause) {
 		return TypeExHelper.findSuitableConstructor(getExceptionType())
 							.flatMap(constructor -> TypeExHelper.instance(constructor,_cause, getExceptionType(),getArguments().orElse(null)))
-							.map(instance -> (T)instance)
+							.map(instance -> (EXCEPTION_INSTANCE)instance)
 							.orElseThrow(() -> new Error(SimpleFormat.format("Unable to find any suitable constructor for class {} with arguments {}"
 																	,getExceptionType().getExceptionClass(),Arrays.asList(new Object[]{Throwable.class,getExceptionType().getClass(),Object[].class}))));
 	}
@@ -101,15 +101,15 @@ public interface TypifiableException<T extends TypifiableException> extends Supp
 	/**
 	 * Returns clone of this same TypifiableException object with the given arguments to replace into message
 	 *
-	 * @param <T> Type of this exception
+	 * @param <EXCEPTION_INSTANCE> Type of this exception
 	 * @param _args arguments to replace to the getMessage() text with the same format basis explained above
 	 * @return The T instance
 	 * @since 0.3.0
 	 */
-	public default <T extends TypifiableException> T with(final Object... _args) {
+	public default <EXCEPTION_INSTANCE extends Throwable & TypifiableException> EXCEPTION_INSTANCE with(final Object... _args) {
 		return TypeExHelper.findSuitableConstructor(getExceptionType())
 							.flatMap(constructor -> TypeExHelper.instance(constructor,getCause(), getExceptionType(),_args))
-							.map(instance -> (T)instance)
+							.map(instance -> (EXCEPTION_INSTANCE)instance)
 							.orElseThrow(() -> new Error(SimpleFormat.format("Unable to find any suitable constructor for class {} with arguments {}"
 																	,getExceptionType().getExceptionClass(),Arrays.asList(new Object[]{Throwable.class,getExceptionType().getClass(),Object[].class}))));
 	}

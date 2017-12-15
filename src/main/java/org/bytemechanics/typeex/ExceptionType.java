@@ -15,11 +15,11 @@
  */
 package org.bytemechanics.typeex;
 
+import java.util.Arrays;
+import java.util.function.Supplier;
 import org.bytemechanics.typeex.impl.TypifiedException;
 import org.bytemechanics.typeex.internal.SimpleFormat;
 import org.bytemechanics.typeex.internal.TypeExHelper;
-import java.util.Arrays;
-import java.util.function.Supplier;
 
 /**
  * Main interface to apply over any exception type. Can be applied also over standard object or over enum although recommended place is over an enum. This interface also extend a supplier of
@@ -83,6 +83,7 @@ public interface ExceptionType<T extends TypifiableException> extends Supplier<T
 	/**
 	 * Returns the instance of the getExceptionClass() with this typified exception with the given cause
 	 *
+	 * @param <T>
 	 * @param _cause cause of the exception
 	 * @return The T instance
 	 * @see TypifiableException
@@ -99,13 +100,13 @@ public interface ExceptionType<T extends TypifiableException> extends Supplier<T
 	/**
 	 * Returns the instance of the getExceptionClass() with this typified exception with the given arguments
 	 *
+	 * @param <T>
 	 * @param _args arguments to replace to the getMessage() text with the same format basis explained above
 	 * @return The T instance
 	 * @see TypifiableException
 	 * @since 0.3.0
 	 */
 	public default T with(final Object... _args) {
-//System.out.println("ARGS:" +Arrays.asList(_args));
 		return TypeExHelper.findSuitableConstructor(this)
 							.flatMap(constructor -> TypeExHelper.instance(constructor,null, this,_args))
 							.map(instance -> (T)instance)
