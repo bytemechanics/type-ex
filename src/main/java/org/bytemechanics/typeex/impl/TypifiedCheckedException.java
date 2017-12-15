@@ -15,10 +15,10 @@
  */
 package org.bytemechanics.typeex.impl;
 
-import org.bytemechanics.typeex.ExceptionType;
-import org.bytemechanics.typeex.TypifiableException;
 import java.util.Arrays;
 import java.util.Optional;
+import org.bytemechanics.typeex.ExceptionType;
+import org.bytemechanics.typeex.TypifiableException;
 
 /**
  * Abstract checked TypifiableException base class. As checked exceptions require individual catch this class is abstract in order to create an individual class for each instance
@@ -100,5 +100,32 @@ public abstract class TypifiedCheckedException extends Exception implements Typi
 	public final Optional<Object[]> getArguments() {
 		return this.arguments
 				.map(args -> Arrays.copyOf(args, args.length));
+	}
+
+	/**
+	 * @see TypifiableException.get()
+	 * @since 1.0.2
+	 */
+	@Override
+	public TypifiedCheckedException get() {
+		return TypifiableException.super.get(); 
+	}
+
+	/**
+	 * @see TypifiableException.with(Object...)
+	 * @since 1.0.2
+	 */
+	@Override
+	public TypifiedCheckedException with(final Object... _args) {
+		return TypifiableException.super.with(_args);
+	}
+
+	/**
+	 * @see TypifiableException.from(Throwable)
+	 * @since 1.0.2
+	 */
+	@Override
+	public TypifiedCheckedException from(final Throwable _cause) {
+		return TypifiableException.super.from(_cause);
 	}
 }

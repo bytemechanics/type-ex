@@ -43,6 +43,39 @@ public class TestGenericsCompilation {
 					throw typifiedException;
 				}catch(TypifiedException e3){
 					reply&=(e3 instanceof TypifiedException);
+					try{
+						final TypifiedException typifiedException=MockedTypifiedExceptionType.TEST_NO_PARAMS.get();
+						throw typifiedException;
+					}catch(TypifiedException e4){
+						reply&=(e4 instanceof TypifiedException);
+					}
+				}
+			}
+		}
+		
+		return reply;
+	}
+	public static boolean correctCastWhenBuildExceptionThrowable(){
+		
+		boolean reply=true;
+		
+		try{
+			throw MockedTypifiedCheckedExceptionType.TEST_NO_PARAMS.with("arg1").from(new Exception("origin"));
+		}catch(MockedCheckedException e){
+			reply&=(e instanceof MockedCheckedException);
+			try{
+				throw MockedTypifiedErrorType.TEST_NO_PARAMS.with("arg1").from(e);
+			}catch(TypifiedError e2){
+				reply&=(e2 instanceof TypifiedError);
+				try{
+					throw MockedTypifiedExceptionType.TEST_NO_PARAMS.with("arg1").from(e2);
+				}catch(TypifiedException e3){
+					reply&=(e3 instanceof TypifiedException);
+					try{
+						throw MockedTypifiedExceptionType.TEST_NO_PARAMS.get();
+					}catch(TypifiedException e4){
+						reply&=(e4 instanceof TypifiedException);
+					}
 				}
 			}
 		}
@@ -55,5 +88,8 @@ public class TestGenericsCompilation {
 	}
 	public static boolean assignMockedChekedException(){
 		return assigableMethod(MockedTypifiedCheckedExceptionType.TEST_NO_PARAMS.with("arg1").from(new Exception("origin")));
+	}
+	public static boolean assignMockedChekedExceptionSupplier(){
+		return assigableMethod(MockedTypifiedCheckedExceptionType.TEST_NO_PARAMS.get());
 	}
 }
