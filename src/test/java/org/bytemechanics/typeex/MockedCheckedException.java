@@ -29,4 +29,19 @@ public class MockedCheckedException extends TypifiedCheckedException {
 	public MockedCheckedException(final Throwable _cause,final ExceptionType _exceptionType,final Object... _arguments) {
 		super(_cause, _exceptionType, _arguments);
 	}
+
+	@Override
+	public MockedCheckedException get() {
+		return (MockedCheckedException)super.get();
+	}
+
+	@Override
+	public MockedCheckedException from(final Throwable _cause) {
+		return (MockedCheckedException)super.from(_cause); 
+	}
+
+	@Override
+	public MockedCheckedException with(final Object... _args) {
+		return (MockedCheckedException)super.with(_args); 
+	}
 }

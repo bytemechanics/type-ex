@@ -25,6 +25,13 @@ import org.bytemechanics.typeex.impl.*
  */
 class GenericsCompilationSpec extends Specification {
 
+	def "Generic exception build should work correctly and return a throwable"(){
+		when:
+			def result=TestGenericsCompilation.correctCastWhenBuildExceptionThrowable()
+			
+		then:
+			result==true
+	}
 	def "Generic exception build should work correctly"(){
 		when:
 			def result=TestGenericsCompilation.correctCastWhenBuildException()
