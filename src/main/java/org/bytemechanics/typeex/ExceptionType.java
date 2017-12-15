@@ -83,7 +83,6 @@ public interface ExceptionType<T extends TypifiableException> extends Supplier<T
 	/**
 	 * Returns the instance of the getExceptionClass() with this typified exception with the given cause
 	 *
-	 * @param <T>
 	 * @param _cause cause of the exception
 	 * @return The T instance
 	 * @see TypifiableException
@@ -100,7 +99,6 @@ public interface ExceptionType<T extends TypifiableException> extends Supplier<T
 	/**
 	 * Returns the instance of the getExceptionClass() with this typified exception with the given arguments
 	 *
-	 * @param <T>
 	 * @param _args arguments to replace to the getMessage() text with the same format basis explained above
 	 * @return The T instance
 	 * @see TypifiableException
