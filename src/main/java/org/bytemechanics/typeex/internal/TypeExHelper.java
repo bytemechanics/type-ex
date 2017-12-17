@@ -15,15 +15,13 @@
  */
 package org.bytemechanics.typeex.internal;
 
-import org.bytemechanics.typeex.ExceptionType;
-import org.bytemechanics.typeex.TypifiableException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.bytemechanics.typeex.ExceptionType;
+import org.bytemechanics.typeex.TypifiableException;
+import org.bytemechanics.typeex.exceptions.UnableToInstantiateTypifiedExceptionError;
 
 /**
  * Helper class for <strong>internal use only</strong>
@@ -34,6 +32,8 @@ import java.util.stream.Stream;
  */
 public final class TypeExHelper {
 
+	private TypeExHelper(){}
+	
 	public static final Optional<Constructor> findSuitableConstructor(final ExceptionType _exceptionType) {
 
 		Optional<Constructor> reply;
@@ -54,10 +54,9 @@ public final class TypeExHelper {
 		
 		try {
 			reply=Optional.ofNullable(_constructor.newInstance(_cause,_exceptionType,_args))
-							.map(instance -> (TypifiableException)instance);
-			
+							.map(instance -> (TypifiableException)instance);			
 		} catch (SecurityException|InstantiationException|IllegalAccessException|IllegalArgumentException|InvocationTargetException e) {
-			throw new Error(SimpleFormat.format("Unable to construct typified exception {} with class {} with arguments {} caused: {}",_exceptionType,_exceptionType.getExceptionClass(),Arrays.asList(new Object[]{Throwable.class,_exceptionType.getClass(),Object[].class}), e.getMessage()),e);
+			throw new UnableToInstantiateTypifiedExceptionError(e,_exceptionType,_args);
 		}
 		
 		return reply;	

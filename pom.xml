@@ -9,7 +9,7 @@
 	<artifactId>type-ex</artifactId>
 	<packaging>jar</packaging>
 	<name>Typified Exception</name>
-	<version>1.0.2</version>
+	<version>1.0.3-SNAPSHOT</version>
 	<description>Library to create exceptions typified in a enumerated, in order to be able to list all possible exceptions in one application.</description>
 	<url>http://www.bytemechanics.org</url>
 	<developers>

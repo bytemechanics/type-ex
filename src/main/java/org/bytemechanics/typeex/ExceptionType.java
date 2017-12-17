@@ -15,6 +15,7 @@
  */
 package org.bytemechanics.typeex;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.function.Supplier;
 import org.bytemechanics.typeex.impl.TypifiedException;
@@ -31,7 +32,7 @@ import org.bytemechanics.typeex.internal.TypeExHelper;
  * @author e103880
  * @since 0.1.0
  */
-public interface ExceptionType<T extends TypifiableException> extends Supplier<T> {
+public interface ExceptionType<T extends TypifiableException> extends Supplier<T>,Serializable {
 
 	/**
 	 * Name of the exception type Note: It's mandatory to implement this method if the implementing class is not an enum, otherwise the enum already implements name() method
@@ -77,13 +78,12 @@ public interface ExceptionType<T extends TypifiableException> extends Supplier<T
 							.flatMap(constructor -> TypeExHelper.instance(constructor,null, this))
 							.map(instance -> (T)instance)
 							.orElseThrow(() -> new Error(SimpleFormat.format("Unable to find any suitable constructor for class {} with arguments {}"
-																	,this.getExceptionClass(),Arrays.asList(new Object[]{Throwable.class,this.getClass(),Object[].class}))));
+																	,this.getExceptionClass(),Arrays.asList(Throwable.class,this.getClass(),Object[].class))));
 	}
 
 	/**
 	 * Returns the instance of the getExceptionClass() with this typified exception with the given cause
 	 *
-	 * @param <T>
 	 * @param _cause cause of the exception
 	 * @return The T instance
 	 * @see TypifiableException
@@ -94,13 +94,12 @@ public interface ExceptionType<T extends TypifiableException> extends Supplier<T
 							.flatMap(constructor -> TypeExHelper.instance(constructor,_cause, this))
 							.map(instance -> (T)instance)
 							.orElseThrow(() -> new Error(SimpleFormat.format("Unable to find any suitable constructor for class {} with arguments {}"
-																	,this.getExceptionClass(),Arrays.asList(new Object[]{Throwable.class,this.getClass(),Object[].class}))));
+																	,this.getExceptionClass(),Arrays.asList(Throwable.class,this.getClass(),Object[].class))));
 	}
 
 	/**
 	 * Returns the instance of the getExceptionClass() with this typified exception with the given arguments
 	 *
-	 * @param <T>
 	 * @param _args arguments to replace to the getMessage() text with the same format basis explained above
 	 * @return The T instance
 	 * @see TypifiableException
@@ -111,6 +110,6 @@ public interface ExceptionType<T extends TypifiableException> extends Supplier<T
 							.flatMap(constructor -> TypeExHelper.instance(constructor,null, this,_args))
 							.map(instance -> (T)instance)
 							.orElseThrow(() -> new Error(SimpleFormat.format("Unable to find any suitable constructor for class {} with arguments {}"
-																	,this.getExceptionClass(),Arrays.asList(new Object[]{Throwable.class,this.getClass(),Object[].class}))));
+																	,this.getExceptionClass(),Arrays.asList(Throwable.class,this.getClass(),Object[].class))));
 	}
 }

@@ -95,7 +95,7 @@ public interface TypifiableException<T extends TypifiableException> extends Supp
 							.flatMap(constructor -> TypeExHelper.instance(constructor,_cause, getExceptionType(),getArguments().orElse(null)))
 							.map(instance -> (EXCEPTION_INSTANCE)instance)
 							.orElseThrow(() -> new Error(SimpleFormat.format("Unable to find any suitable constructor for class {} with arguments {}"
-																	,getExceptionType().getExceptionClass(),Arrays.asList(new Object[]{Throwable.class,getExceptionType().getClass(),Object[].class}))));
+																	,getExceptionType().getExceptionClass(),Arrays.asList(Throwable.class,getExceptionType().getClass(),Object[].class))));
 	}
 
 	/**
@@ -111,7 +111,7 @@ public interface TypifiableException<T extends TypifiableException> extends Supp
 							.flatMap(constructor -> TypeExHelper.instance(constructor,getCause(), getExceptionType(),_args))
 							.map(instance -> (EXCEPTION_INSTANCE)instance)
 							.orElseThrow(() -> new Error(SimpleFormat.format("Unable to find any suitable constructor for class {} with arguments {}"
-																	,getExceptionType().getExceptionClass(),Arrays.asList(new Object[]{Throwable.class,getExceptionType().getClass(),Object[].class}))));
+																	,getExceptionType().getExceptionClass(),Arrays.asList(Throwable.class,getExceptionType().getClass(),Object[].class))));
 	}
 
 	/**
