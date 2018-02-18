@@ -31,8 +31,6 @@ import org.bytemechanics.typeex.exceptions.UnableToInstantiateTypifiedExceptionE
  * @version 1.0.0
  */
 public final class TypeExHelper {
-
-	private TypeExHelper(){}
 	
 	public static final Optional<Constructor> findSuitableConstructor(final ExceptionType _exceptionType) {
 

@@ -19,8 +19,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.function.Supplier;
 import org.bytemechanics.typeex.impl.TypifiedException;
-import org.bytemechanics.typeex.internal.SimpleFormat;
 import org.bytemechanics.typeex.internal.TypeExHelper;
+import org.bytemechanics.typex.internal.commons.string.SimpleFormat;
 
 /**
  * Main interface to apply over any exception type. Can be applied also over standard object or over enum although recommended place is over an enum. This interface also extend a supplier of

@@ -23,8 +23,8 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.bytemechanics.typeex.internal.SimpleFormat;
 import org.bytemechanics.typeex.internal.TypeExHelper;
+import org.bytemechanics.typex.internal.commons.string.SimpleFormat;
 
 /**
  * Interface to be implemented by any typified exception
