@@ -103,7 +103,7 @@ public abstract class TypifiedCheckedException extends Exception implements Typi
 	}
 
 	/**
-	 * @see TypifiableException.get()
+	 * @see TypifiableException#get() 
 	 * @since 1.0.2
 	 */
 	@Override
@@ -112,7 +112,7 @@ public abstract class TypifiedCheckedException extends Exception implements Typi
 	}
 
 	/**
-	 * @see TypifiableException.with(Object...)
+	 * @see TypifiableException#with(java.lang.Object...)
 	 * @since 1.0.2
 	 */
 	@Override
@@ -121,7 +121,7 @@ public abstract class TypifiedCheckedException extends Exception implements Typi
 	}
 
 	/**
-	 * @see TypifiableException.from(Throwable)
+	 * @see TypifiableException#from(java.lang.Throwable) 
 	 * @since 1.0.2
 	 */
 	@Override
