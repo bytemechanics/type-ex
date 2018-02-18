@@ -1,4 +1,8 @@
 # Type-ex
+[![Latest version](https://maven-badges.herokuapp.com/maven-central/org.bytemechanics/type-ex/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.bytemechanics/type-ex/badge.svg)
+[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=org.bytemechanics%3Atype-ex)](https://sonarcloud.io/dashboard/index/org.bytemechanics%3Atype-ex)
+[![Coverage](https://sonarcloud.io/api/badges/measure?key=org.bytemechanics%3Atype-ex&metric=coverage)](https://sonarcloud.io/dashboard/index/org.bytemechanics%3Atype-ex)
+
 Type-ex it's a library to make easy application errors classification. 
 
 ## Motivation
