@@ -52,9 +52,10 @@
 						<configuration>
 							<copies>
 								<copy>
-									<artifact>${project.groupId}:copy-commons:1.2.0</artifact>
+									<artifact>${project.groupId}:copy-commons:1.2.1-SNAPSHOT</artifact>
 									<classes>
 										<class>org.bytemechanics.commons.string.SimpleFormat</class>
+										<class>org.bytemechanics.commons.reflection.ObjectFactory</class>
 									</classes>
 									<fromPackage>org.bytemechanics.commons</fromPackage>
 									<toPackage>org.bytemechanics.typex.internal.commons</toPackage>

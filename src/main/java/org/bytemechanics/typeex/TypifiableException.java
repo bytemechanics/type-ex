@@ -23,12 +23,11 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.bytemechanics.typeex.internal.TypeExHelper;
+import org.bytemechanics.typex.internal.commons.reflection.ObjectFactory;
 import org.bytemechanics.typex.internal.commons.string.SimpleFormat;
 
 /**
  * Interface to be implemented by any typified exception
- *
  * @author afarre
  * @param <T> extends herself
  * @since 0.1.0
@@ -44,7 +43,6 @@ public interface TypifiableException<T extends TypifiableException> extends Supp
 
 	/**
 	 * Returns the ExceptionType instance of this TypifiableException
-	 *
 	 * @return The ExceptionType instance of this TypifiableException
 	 * @since 0.1.0
 	 */
@@ -52,7 +50,6 @@ public interface TypifiableException<T extends TypifiableException> extends Supp
 
 	/**
 	 * Returns the arguments provided to replace into the ExceptionType message TypifiableException
-	 *
 	 * @return An Optional with the array of arguments to replace into the ExceptionType message TypifiableException
 	 * @since 0.1.0
 	 */
@@ -60,7 +57,6 @@ public interface TypifiableException<T extends TypifiableException> extends Supp
 
 	/**
 	 * Returns the formatted message (replaced with provided to replace into the ExceptionType message TypifiableException
-	 *
 	 * @return An Optional with the array of arguments to replace into the ExceptionType message TypifiableException
 	 * @since 0.1.0
 	 */
@@ -91,10 +87,11 @@ public interface TypifiableException<T extends TypifiableException> extends Supp
 	 * @since 0.3.0
 	 */
 	public default <EXCEPTION_INSTANCE extends Throwable & TypifiableException<EXCEPTION_INSTANCE>> EXCEPTION_INSTANCE from(final Throwable _cause) {
-		return TypeExHelper.findSuitableConstructor(getExceptionType())
-							.flatMap(constructor -> TypeExHelper.instance(constructor,_cause, getExceptionType(),getArguments().orElse(null)))
-							.map(instance -> (EXCEPTION_INSTANCE)instance)
-							.orElseThrow(() -> new Error(SimpleFormat.format("Unable to find any suitable constructor for class {} with arguments {}"
+		return ObjectFactory.of((Class<EXCEPTION_INSTANCE>)getExceptionType().getExceptionClass())
+								.with(_cause, getExceptionType(),getArguments().orElseGet(() -> new Object[0]))
+								.supplier()
+									.get()
+									.orElseThrow(() -> new Error(SimpleFormat.format("Unable to find any suitable constructor for class {} with arguments {}"
 																	,getExceptionType().getExceptionClass(),Arrays.asList(Throwable.class,getExceptionType().getClass(),Object[].class))));
 	}
 
@@ -107,10 +104,11 @@ public interface TypifiableException<T extends TypifiableException> extends Supp
 	 * @since 0.3.0
 	 */
 	public default <EXCEPTION_INSTANCE extends Throwable & TypifiableException> EXCEPTION_INSTANCE with(final Object... _args) {
-		return TypeExHelper.findSuitableConstructor(getExceptionType())
-							.flatMap(constructor -> TypeExHelper.instance(constructor,getCause(), getExceptionType(),_args))
-							.map(instance -> (EXCEPTION_INSTANCE)instance)
-							.orElseThrow(() -> new Error(SimpleFormat.format("Unable to find any suitable constructor for class {} with arguments {}"
+		return ObjectFactory.of((Class<EXCEPTION_INSTANCE>)getExceptionType().getExceptionClass())
+								.with(getCause(), getExceptionType(),_args)
+								.supplier()
+									.get()
+									.orElseThrow(() -> new Error(SimpleFormat.format("Unable to find any suitable constructor for class {} with arguments {}"
 																	,getExceptionType().getExceptionClass(),Arrays.asList(Throwable.class,getExceptionType().getClass(),Object[].class))));
 	}
 
@@ -123,7 +121,6 @@ public interface TypifiableException<T extends TypifiableException> extends Supp
 
 	/**
 	 * Returns the stacktrace as string
-	 *
 	 * @return The stacktrace in string format
 	 * @since 0.1.0
 	 */
@@ -136,7 +133,9 @@ public interface TypifiableException<T extends TypifiableException> extends Supp
 			printStackTrace(printWriter);
 			reply = Optional.of(writer.toString());
 		} catch (IOException e) {
-			Logger.getLogger(TypifiableException.class.getName()).log(Level.SEVERE, "Unable to convert exception {} to string", new Object[]{getExceptionType(), e});
+			Logger.getLogger(TypifiableException.class.getName())
+					.log(Level.SEVERE, e,
+							() -> String.format("Unable to convert exception %s to string", getExceptionType()));
 			reply = Optional.empty();
 		}
 
