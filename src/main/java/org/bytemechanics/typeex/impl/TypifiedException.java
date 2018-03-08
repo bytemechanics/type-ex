@@ -17,6 +17,7 @@ package org.bytemechanics.typeex.impl;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.function.Supplier;
 import org.bytemechanics.typeex.ExceptionType;
 import org.bytemechanics.typeex.TypifiableException;
 
@@ -28,7 +29,7 @@ import org.bytemechanics.typeex.TypifiableException;
 public class TypifiedException extends RuntimeException implements TypifiableException<TypifiedException>{
 
 	private final ExceptionType exceptionType;
-	private final Optional<Object[]> arguments;
+	private final transient Supplier<Optional<Object[]>> arguments;
 	
 	
 	/**
@@ -54,7 +55,7 @@ public class TypifiedException extends RuntimeException implements TypifiableExc
 	public TypifiedException(final Throwable _cause,final ExceptionType _exceptionType,final Object... _arguments){
 		super(_exceptionType.getMessage(),_cause);
 		this.exceptionType=_exceptionType;
-		this.arguments=Optional.ofNullable(_arguments)
+		this.arguments=() -> Optional.ofNullable(_arguments)
 							.filter(args -> args.length>0)
 							.map(args -> Arrays.copyOf(args, args.length));
 	}
@@ -93,8 +94,7 @@ public class TypifiedException extends RuntimeException implements TypifiableExc
 	 */
 	@Override
 	public final Optional<Object[]> getArguments() {
-		return	this.arguments
-					.map(args -> Arrays.copyOf(args, args.length));
+		return	this.arguments.get();
 	}
 
 	/**

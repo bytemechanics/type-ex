@@ -26,6 +26,7 @@ import org.bytemechanics.typeex.impl.*
 class GenericsCompilationSpec extends Specification {
 
 	def "Generic exception build should work correctly and return a throwable"(){
+		println(">>>>> GenericsCompilationSpec >>>> Generic exception build should work correctly and return a throwable")
 		when:
 			def result=TestGenericsCompilation.correctCastWhenBuildExceptionThrowable()
 			
@@ -33,6 +34,7 @@ class GenericsCompilationSpec extends Specification {
 			result==true
 	}
 	def "Generic exception build should work correctly"(){
+		println(">>>>> GenericsCompilationSpec >>>> Generic exception build should work correctly")
 		when:
 			def result=TestGenericsCompilation.correctCastWhenBuildException()
 			
@@ -40,6 +42,7 @@ class GenericsCompilationSpec extends Specification {
 			result==true
 	}
 	def "Generic exception build assignation should work correctly"(){
+		println(">>>>> GenericsCompilationSpec >>>> Generic exception build assignation should work correctly")
 		when:
 			def result=TestGenericsCompilation.assignMockedChekedException()
 			
