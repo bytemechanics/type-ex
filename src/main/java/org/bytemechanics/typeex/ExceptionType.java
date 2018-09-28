@@ -27,7 +27,7 @@ import org.bytemechanics.typex.internal.commons.string.SimpleFormat;
  * @param <T> Something extending typifiable exception
  * @see TypifiableException
  * @see Supplier
- * @author e103880
+ * @author afarre
  * @since 0.1.0
  */
 public interface ExceptionType<T extends TypifiableException> extends Supplier<T>,Serializable {
