@@ -1,7 +1,7 @@
 # Type-ex
 [![Latest version](https://maven-badges.herokuapp.com/maven-central/org.bytemechanics/type-ex/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.bytemechanics/type-ex/badge.svg)
-[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=org.bytemechanics%3Atype-ex)](https://sonarcloud.io/dashboard/index/org.bytemechanics%3Atype-ex)
-[![Coverage](https://sonarcloud.io/api/badges/measure?key=org.bytemechanics%3Atype-ex&metric=coverage)](https://sonarcloud.io/dashboard/index/org.bytemechanics%3Atype-ex)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=org.bytemechanics%3Atype-ex&metric=alert_status)](https://sonarcloud.io/dashboard/index/org.bytemechanics%3Atype-ex)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=org.bytemechanics%3Atype-ex&metric=coverage)](https://sonarcloud.io/dashboard/index/org.bytemechanics%3Atype-ex)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Type-ex it's a library to make easy application errors classification. 
@@ -29,7 +29,7 @@ dependencies {
 ```Java
 package mypackage;
 import org.bytemechanics.typeex.impl.TypifiedException;
-public enum MyExceptionType implements ExceptionType{
+public enum MyExceptionType implements ExceptionType<TypifiedException>{
 	EXCEPTION_TYPE_NO_PARAMETERIZED("This message has no substitution parameters"),
 	EXCEPTION_TYPE_PARAMETERIZED("This message has two {} substitution parameters {}"),
 	;	
